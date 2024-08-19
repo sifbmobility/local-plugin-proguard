@@ -108,3 +108,31 @@
 # These clases contain references to cordova webView
 -keep class com.ionicframework.cordova.webview.** {*; }
 -keep class com.ionicframework.cordova.webview.*
+
+-keep class com.newrelic.** { *; }
+-dontwarn com.newrelic.**
+-keepattributes Exceptions, Signature, InnerClasses, LineNumberTable, SourceFile, EnclosingMethod
+
+##
+## NewRelic Gradle plugin 7.x may require the following additions:
+##
+# Retain generic signatures of TypeToken and its subclasses if R8 version 3.0 full-mode is enabled.
+# https://r8.googlesource.com/r8/+/refs/heads/master/compatibility-faq.md#r8-full-mode
+-keepattributes Signature
+-keep class com.newrelic.com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.newrelic.com.google.gson.reflect.TypeToken
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+-dontwarn java.beans.BeanInfo
+-dontwarn java.beans.IntrospectionException
+-dontwarn java.beans.Introspector
+-dontwarn java.beans.PropertyDescriptor
+-dontwarn sun.nio.ch.DirectBuffer
+
+
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.GF2Vector
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.IntUtils
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.LittleEndianConversions
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.Matrix
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.Permutation
+-dontwarn org.bouncycastle.pqc.math.linearalgebra.Vector
